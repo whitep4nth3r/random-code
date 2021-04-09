@@ -31,9 +31,7 @@ export default class Go {
       Go.getRandomVariableDeclaration(),
       `${Go.getRandomFunctionName()}()`,
     ];
-    return `${Helpers.getIndentation({ type: "tab" })}${Helpers.getRandomEntry(
-      options
-    )}`;
+    return `${Helpers.getIndentation({ type: "tab" })}${Helpers.getRandomEntry(options)}`;
   }
 
   static getRandomImportName() {
@@ -232,15 +230,12 @@ export default class Go {
     const importsToGet = Math.floor(lines / 5);
     // coin flip for adding a return statement or not
     const addReturnLine = Math.floor(Math.random() * 2);
-    let fillerLineQty =
-      parseInt(lines, 10) - 2 - 2 - importsToGet - addReturnLine;
+    let fillerLineQty = parseInt(lines, 10) - 2 - 2 - importsToGet - addReturnLine;
     let randomImports = [];
     let lastLine;
 
     //package name is mandatory, so let's always have this, and exclude it from the line count
-    const pkgLine = `package ${Go.getRandomPackageName()}${Helpers.addNewLine(
-      2
-    )}`;
+    const pkgLine = `package ${Go.getRandomPackageName()}${Helpers.addNewLine(2)}`;
 
     //set up random package import[s]
     let importLine = "";
@@ -254,9 +249,7 @@ export default class Go {
       }
       importLine = `import (${Helpers.addNewLine()}${Helpers.getIndentation({
         type: "tab",
-      })}\"fmt"${Helpers.addNewLine()}${randomImports.join(
-        ""
-      )})${Helpers.addNewLine(2)}`;
+      })}\"fmt"${Helpers.addNewLine()}${randomImports.join("")})${Helpers.addNewLine(2)}`;
     } else {
       importLine = `import "fmt"${Helpers.addNewLine(2)}`;
     }
@@ -276,12 +269,6 @@ export default class Go {
 
     lastLine += `${Helpers.addNewLine()}}`;
 
-    return (
-      pkgLine +
-      importLine +
-      firstLine +
-      fillerLines.join(Helpers.addNewLine()) +
-      lastLine
-    );
+    return pkgLine + importLine + firstLine + fillerLines.join(Helpers.addNewLine()) + lastLine;
   }
 }

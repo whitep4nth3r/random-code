@@ -1,15 +1,20 @@
 {
   "name": "@whitep4nth3r/random-code",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Need some code for your project? We've got you covered. Choose your language. Choose how much code. BÄM! You got code.",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d dist"
   },
   "keywords": [
     "random"
   ],
   "author": "whitep4nth3r",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
 }

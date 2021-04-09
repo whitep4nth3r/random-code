@@ -69,6 +69,9 @@ export default function generateRandomCode(lang, n) {
     case "vba":
       randomCode = LANGUAGES.VBA.generateRandomCode(lines, addComment);
       break;
+    case "scala":
+      randomCode = LANGUAGES.Scala.generateRandomCode(lines, addComment);
+      break;
     default:
       randomCode = "lol";
   }

@@ -25,7 +25,8 @@ var Languages = (_Languages = {
   rust: "Rust",
   swift: "Swift",
   cplusplus: "C++",
-  sql: "SQL"
+  sql: "SQL",
+  scala:"Scala",
 }, _defineProperty(_Languages, "swift", "Swift"), _defineProperty(_Languages, "vba", "VBA"), _Languages);
 
 exports.default = Languages;

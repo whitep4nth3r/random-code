@@ -17,6 +17,7 @@ const Contributors = {
   cplusplus: ["lucecarter"],
   sql: ["mattytwoshoes"],
   vba: ["mark-phillipson"],
+  scala: ["firephil"],
 };
 
 export default Contributors;

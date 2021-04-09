@@ -21,7 +21,8 @@ var Contributors = {
   swift: ["justinhhorner"],
   cplusplus: ["lucecarter"],
   sql: ["mattytwoshoes"],
-  vba: ["mark-phillipson"]
+  vba: ["mark-phillipson"],
+  scala: ["firephil"]
 };
 
 exports.default = Contributors;

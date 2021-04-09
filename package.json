@@ -1,6 +1,6 @@
 {
   "name": "@whitep4nth3r/random-code",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Need some code for your project? We've got you covered. Choose your language. Choose how much code. BÄM! You got code.",
   "type": "module",
   "main": "index.js",

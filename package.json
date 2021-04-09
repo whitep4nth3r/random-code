@@ -1,0 +1,15 @@
+{
+  "name": "@whitep4nth3r/random-code",
+  "version": "1.0.4",
+  "description": "Need some code for your project? We've got you covered. Choose your language. Choose how much code. BÄM! You got code.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "random"
+  ],
+  "author": "whitep4nth3r",
+  "license": "MIT"
+}

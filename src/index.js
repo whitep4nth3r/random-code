@@ -1,12 +1,14 @@
 import * as LANGUAGES from "./languages/index.js";
-import { getRandomLang, getRandomInt } from "./utils/helpers.js";
+import * as Constants from "./constants/index.js";
+import { Helpers } from "./utils/index.js";
 
 export default function generateRandomCode(lang, n) {
   let language;
   let lines;
+  let randomCode;
 
-  language = !lang ? getRandomLang() : lang;
-  lines = !n ? getRandomInt(4, 12) : n;
+  language = !lang ? Helpers.getRandomLang() : lang;
+  lines = !n ? Helpers.getRandomInt(4, 12) : n;
 
   const addComment = (Math.random() + 0.5) >> 0;
   // 3 lines will be dedicated to a for loop if lines > 7
@@ -14,42 +16,66 @@ export default function generateRandomCode(lang, n) {
 
   switch (language) {
     case "cobol":
-      return LANGUAGES.COBOL.generateRandomCode(lines);
+      randomCode = LANGUAGES.COBOL.generateRandomCode(lines);
+      break;
     case "cplusplus":
-      return LANGUAGES.CPlusPlus.generateRandomCode(lines);
+      randomCode = LANGUAGES.CPlusPlus.generateRandomCode(lines);
+      break;
     case "csharp":
-      return LANGUAGES.CSharp.generateRandomCode(lines, addComment);
+      randomCode = LANGUAGES.CSharp.generateRandomCode(lines, addComment);
+      break;
     case "css":
-      return LANGUAGES.Css.generateRandomCode(lines, addComment);
+      randomCode = LANGUAGES.Css.generateRandomCode(lines, addComment);
+      break;
     case "docker":
-      return LANGUAGES.Docker.generateRandomCode(lines);
+      randomCode = LANGUAGES.Docker.generateRandomCode(lines);
+      break;
     case "fsharp":
-      return LANGUAGES.FSharp.generateRandomCode(lines);
+      randomCode = LANGUAGES.FSharp.generateRandomCode(lines);
+      break;
     case "go":
-      return LANGUAGES.Go.generateRandomCode(lines);
+      randomCode = LANGUAGES.Go.generateRandomCode(lines);
+      break;
     case "java":
-      return LANGUAGES.Java.generateRandomCode(lines, addComment);
+      randomCode = LANGUAGES.Java.generateRandomCode(lines, addComment);
+      break;
     case "js":
-      return LANGUAGES.JavaScript.generateRandomCode(lines, addComment, includeForLoop);
+      randomCode = LANGUAGES.JavaScript.generateRandomCode(lines, addComment, includeForLoop);
+      break;
     case "kotlin":
-      return LANGUAGES.Kotlin.generateRandomCode(lines);
+      randomCode = LANGUAGES.Kotlin.generateRandomCode(lines);
+      break;
     case "php":
-      return LANGUAGES.PHP.generateRandomCode(lines, addComment);
+      randomCode = LANGUAGES.PHP.generateRandomCode(lines, addComment);
+      break;
     case "powershell":
-      return LANGUAGES.Powershell.generateRandomCode(lines, addComment);
+      randomCode = LANGUAGES.Powershell.generateRandomCode(lines, addComment);
+      break;
     case "python":
-      return LANGUAGES.Python.generateRandomCode(lines, addComment);
+      randomCode = LANGUAGES.Python.generateRandomCode(lines, addComment);
+      break;
     case "rust":
-      return LANGUAGES.Rust.generateRandomCode(lines);
+      randomCode = LANGUAGES.Rust.generateRandomCode(lines);
+      break;
     case "sql":
-      return LANGUAGES.SQL.generateRandomCode(lines);
+      randomCode = LANGUAGES.SQL.generateRandomCode(lines);
+      break;
     case "swift":
-      return LANGUAGES.Swift.generateRandomCode(lines);
+      randomCode = LANGUAGES.Swift.generateRandomCode(lines);
+      break;
     case "ts":
-      return LANGUAGES.TypeScript.generateRandomCode(lines, addComment, includeForLoop);
+      randomCode = LANGUAGES.TypeScript.generateRandomCode(lines, addComment, includeForLoop);
+      break;
     case "vba":
-      return LANGUAGES.VBA.generateRandomCode(lines, addComment);
+      randomCode = LANGUAGES.VBA.generateRandomCode(lines, addComment);
+      break;
     default:
-      return "lol";
+      randomCode = "lol";
   }
+
+  return {
+    code: randomCode,
+    language: Constants.Languages[lang],
+    contributors: Helpers.getContributors(lang),
+  };
 }

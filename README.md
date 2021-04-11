@@ -46,3 +46,7 @@ Here's an example response:
 ## Profit
 
 And lol.
+
+## Contributions
+
+If you'd like to contribute to this project, [check out this blog post](https://whitep4nth3r.com/blog/how-to-build-test-and-release-node-module-es6) to understand how to build and test the code locally.

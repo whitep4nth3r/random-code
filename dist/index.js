@@ -28,7 +28,7 @@ function generateRandomCode(lang, n) {
   var code = void 0;
 
   language = !lang ? _index3.Helpers.getRandomLang() : lang;
-  lines = !n ? _index3.Helpers.getRandomInt(4, 12) : n;
+  lines = !n ? _index3.Helpers.getRandomInt(3, 20) : n;
 
   var addComment = Math.random() + 0.5 >> 0;
   // 3 lines will be dedicated to a for loop if lines > 7
@@ -95,6 +95,7 @@ function generateRandomCode(lang, n) {
 
   return {
     code: code,
+    lines: lines,
     languageKey: language,
     languageValue: Constants.Languages[language],
     contributors: _index3.Helpers.getContributors(language)

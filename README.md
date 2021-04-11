@@ -28,7 +28,7 @@ If you do not provide these parameters, your result will be random.
 Here's an example request:
 
 ```javascript
-const myRandomCode = generateRandomCode("js", 5);
+const myRandomCode = generateRandomCode("js", 3);
 ```
 
 Here's an example response:
@@ -36,6 +36,7 @@ Here's an example response:
 ```json
 {
   "code": "const replaceObject = () => {\n    /* FIXME: For some reason this is causing the code below to error out? */\n    const property = true;\n    return 0;\n}",
+  "lines": "3",
   "languageKey": "js",
   "languageValue": "JavaScript",
   "contributors": ["whitep4nth3r", "lukeocodes", "negue", "isabellabrookes"]

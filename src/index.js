@@ -12,7 +12,7 @@ export function generateRandomCode(lang, n) {
   let code;
 
   language = !lang ? Helpers.getRandomLang() : lang;
-  lines = !n ? Helpers.getRandomInt(4, 12) : n;
+  lines = !n ? Helpers.getRandomInt(3, 20) : n;
 
   const addComment = (Math.random() + 0.5) >> 0;
   // 3 lines will be dedicated to a for loop if lines > 7
@@ -79,6 +79,7 @@ export function generateRandomCode(lang, n) {
 
   return {
     code,
+    lines,
     languageKey: language,
     languageValue: Constants.Languages[language],
     contributors: Helpers.getContributors(language),

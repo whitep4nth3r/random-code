@@ -36,7 +36,8 @@ Here's an example response:
 ```json
 {
   "code": "const replaceObject = () => {\n    /* FIXME: For some reason this is causing the code below to error out? */\n    const property = true;\n    return 0;\n}",
-  "language": "JavaScript",
+  "languageKey": "js",
+  "languageValue": "JavaScript",
   "contributors": ["whitep4nth3r", "lukeocodes", "negue", "isabellabrookes"]
 }
 ```

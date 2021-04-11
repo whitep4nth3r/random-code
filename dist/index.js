@@ -3,7 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = generateRandomCode;
+exports.getLanguages = getLanguages;
+exports.generateRandomCode = generateRandomCode;
 
 var _index = require("./languages/index.js");
 
@@ -16,6 +17,10 @@ var Constants = _interopRequireWildcard(_index2);
 var _index3 = require("./utils/index.js");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function getLanguages() {
+  return Constants.Languages;
+}
 
 function generateRandomCode(lang, n) {
   var language = void 0;
@@ -90,7 +95,7 @@ function generateRandomCode(lang, n) {
 
   return {
     code: randomCode,
-    language: Constants.Languages[lang],
-    contributors: _index3.Helpers.getContributors(lang)
+    language: Constants.Languages[language],
+    contributors: _index3.Helpers.getContributors(language)
   };
 }

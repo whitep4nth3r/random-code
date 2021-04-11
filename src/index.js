@@ -2,7 +2,11 @@ import * as LANGUAGES from "./languages/index.js";
 import * as Constants from "./constants/index.js";
 import { Helpers } from "./utils/index.js";
 
-export default function generateRandomCode(lang, n) {
+export function getLanguages() {
+  return Constants.Languages;
+}
+
+export function generateRandomCode(lang, n) {
   let language;
   let lines;
   let randomCode;
@@ -75,7 +79,7 @@ export default function generateRandomCode(lang, n) {
 
   return {
     code: randomCode,
-    language: Constants.Languages[lang],
-    contributors: Helpers.getContributors(lang),
+    language: Constants.Languages[language],
+    contributors: Helpers.getContributors(language),
   };
 }

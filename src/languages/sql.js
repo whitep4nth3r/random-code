@@ -174,7 +174,8 @@ export default class SQL {
   }
 
   static generateRandomCode(lines) {
-    let firstLine = "SELECT" + ` ${SQL.getRandomFieldName()}${Helpers.addNewLine()}`;
+    const distinct = Helpers.getRandomInt(1, 10) <= 3 ? " DISTINCT" : "";
+    let firstLine = "SELECT" + `${distinct} ${SQL.getRandomFieldName()}${Helpers.addNewLine()}`;
     let fillerLineQty = parseInt(lines, 10);
     let fillerLines = [];
     //first loop is just for field names sorry

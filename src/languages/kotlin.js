@@ -19,18 +19,20 @@ export default class Kotlin {
     return params;
   }
 
-  static getRandomVariableDeclaration(indentLevel) {
+  static getRandomVariableDeclaration(indentLevel, memory) {
     const randomType = this.getRandomType();
     const typeName = randomType.name();
     let typeValue;
     if (Helpers.getRandomInt(0, 10) > 6) {
       typeValue = this.getRandomFunctionCall(0, 3);
     } else {
-      typeValue = randomType.generator(typeName);
+      typeValue = randomType.generator();
     }
-    return `${Kotlin.indent(indentLevel)}val ${this.getRandomVariableName(
-      3
-    )}: ${typeName} = ${typeValue}`;
+    const varName = this.getRandomVariableName(3);
+    if (memory) {
+      memory.addVariable(varName, randomType);
+    }
+    return `${Kotlin.indent(indentLevel)}val ${varName}: ${typeName} = ${typeValue}`;
   }
 
   static getRandomVariableName(maxLength) {
@@ -38,6 +40,7 @@ export default class Kotlin {
   }
 
   static getRandomType() {
+    const randomName = Helpers.capitalizeFirstChar(this.getRandomVariableName(2));
     const types = [
       {
         name: () => "String",
@@ -48,11 +51,8 @@ export default class Kotlin {
         generator: (_) => Math.floor(Math.random() * 666),
       },
       {
-        name: () => {
-          const randomName = this.getRandomVariableName(2);
-          return Helpers.capitalizeFirstChar(randomName);
-        },
-        generator: (name) => `${name}()`,
+        name: () => randomName,
+        generator: (_) => `${randomName}()`,
       },
     ];
     return Helpers.getRandomEntry(types);
@@ -62,7 +62,7 @@ export default class Kotlin {
     return `${Kotlin.indent(indentLevel)}${this.getRandomVariableName(3)}(${this.getRandomTypes(
       maxParamCount
     )
-      .map((p) => p.generator(p.name()))
+      .map((p) => p.generator())
       .join(", ")})`;
   }
 
@@ -95,10 +95,10 @@ export default class Kotlin {
     return "".padStart(level || 0, " ");
   }
 
-  static getRandomFillerLine(indentLevel) {
+  static getRandomFillerLine(indentLevel, memory) {
     const options = [
       () => `${Kotlin.indent(indentLevel)}println(${Helpers.getRandomLogLine()})`,
-      () => Kotlin.getRandomVariableDeclaration(indentLevel),
+      () => Kotlin.getRandomVariableDeclaration(indentLevel, memory),
       () => Kotlin.getRandomFunctionCall(indentLevel, 3),
       () => Kotlin.getRandomLoop(indentLevel || 0),
     ];
@@ -106,16 +106,43 @@ export default class Kotlin {
   }
 
   static generateRandomCode(lines) {
-    const firstLine = `${Kotlin.getRandomMethodSignature()} {${Helpers.addNewLine()}`;
+    const memory = new Memory();
+    let methodSignatureReturn = "";
     let fillerLineQty = parseInt(lines, 10) - 2;
     let fillerLines = [];
 
     for (let i = 1; i <= fillerLineQty; i++) {
-      fillerLines.push(`    ${Kotlin.getRandomFillerLine()}`);
+      fillerLines.push(`    ${Kotlin.getRandomFillerLine(0, memory)}`);
     }
-
-    const lastLine = `${Helpers.addNewLine()}}`;
-
+    let returnLine = "";
+    if (Helpers.getRandomInt(0, 5) > 2) {
+      const randomVariable = memory.getRandomVariable();
+      if (randomVariable !== null) {
+        returnLine = `${Helpers.addNewLine()}    return ${randomVariable.name}`;
+        methodSignatureReturn = `: ${randomVariable.varType.name()}`
+      }
+    }
+    const firstLine = `${Kotlin.getRandomMethodSignature()}${methodSignatureReturn} {${Helpers.addNewLine()}`;
+    const lastLine = `${returnLine}${Helpers.addNewLine()}}`;
     return firstLine + fillerLines.join(Helpers.addNewLine()) + lastLine;
+  }
+}
+
+class Memory {
+
+  constructor() {
+    this.variables = [];
+  }
+  
+  addVariable(name, varType) {
+    this.variables.push({name: name, varType: varType});
+  }
+
+  getRandomVariable() {
+    if (this.variables.length > 0) {
+      return Helpers.getRandomEntry(this.variables);
+    } else {
+      return null;
+    }
   }
 }

@@ -39,16 +39,20 @@ var Kotlin = function () {
     }
   }, {
     key: "getRandomVariableDeclaration",
-    value: function getRandomVariableDeclaration(indentLevel) {
+    value: function getRandomVariableDeclaration(indentLevel, memory) {
       var randomType = this.getRandomType();
       var typeName = randomType.name();
       var typeValue = void 0;
       if (_index.Helpers.getRandomInt(0, 10) > 6) {
         typeValue = this.getRandomFunctionCall(0, 3);
       } else {
-        typeValue = randomType.generator(typeName);
+        typeValue = randomType.generator();
       }
-      return Kotlin.indent(indentLevel) + "val " + this.getRandomVariableName(3) + ": " + typeName + " = " + typeValue;
+      var varName = this.getRandomVariableName(3);
+      if (memory) {
+        memory.addVariable(varName, randomType);
+      }
+      return Kotlin.indent(indentLevel) + "val " + varName + ": " + typeName + " = " + typeValue;
     }
   }, {
     key: "getRandomVariableName",
@@ -58,8 +62,7 @@ var Kotlin = function () {
   }, {
     key: "getRandomType",
     value: function getRandomType() {
-      var _this2 = this;
-
+      var randomName = _index.Helpers.capitalizeFirstChar(this.getRandomVariableName(2));
       var types = [{
         name: function name() {
           return "String";
@@ -76,11 +79,10 @@ var Kotlin = function () {
         }
       }, {
         name: function name() {
-          var randomName = _this2.getRandomVariableName(2);
-          return _index.Helpers.capitalizeFirstChar(randomName);
+          return randomName;
         },
-        generator: function generator(name) {
-          return name + "()";
+        generator: function generator(_) {
+          return randomName + "()";
         }
       }];
       return _index.Helpers.getRandomEntry(types);
@@ -89,7 +91,7 @@ var Kotlin = function () {
     key: "getRandomFunctionCall",
     value: function getRandomFunctionCall(indentLevel, maxParamCount) {
       return "" + Kotlin.indent(indentLevel) + this.getRandomVariableName(3) + "(" + this.getRandomTypes(maxParamCount).map(function (p) {
-        return p.generator(p.name());
+        return p.generator();
       }).join(", ") + ")";
     }
   }, {
@@ -124,11 +126,11 @@ var Kotlin = function () {
     }
   }, {
     key: "getRandomFillerLine",
-    value: function getRandomFillerLine(indentLevel) {
+    value: function getRandomFillerLine(indentLevel, memory) {
       var options = [function () {
         return Kotlin.indent(indentLevel) + "println(" + _index.Helpers.getRandomLogLine() + ")";
       }, function () {
-        return Kotlin.getRandomVariableDeclaration(indentLevel);
+        return Kotlin.getRandomVariableDeclaration(indentLevel, memory);
       }, function () {
         return Kotlin.getRandomFunctionCall(indentLevel, 3);
       }, function () {
@@ -139,16 +141,24 @@ var Kotlin = function () {
   }, {
     key: "generateRandomCode",
     value: function generateRandomCode(lines) {
-      var firstLine = Kotlin.getRandomMethodSignature() + " {" + _index.Helpers.addNewLine();
+      var memory = new Memory();
+      var methodSignatureReturn = "";
       var fillerLineQty = parseInt(lines, 10) - 2;
       var fillerLines = [];
 
       for (var i = 1; i <= fillerLineQty; i++) {
-        fillerLines.push("    " + Kotlin.getRandomFillerLine());
+        fillerLines.push("    " + Kotlin.getRandomFillerLine(0, memory));
       }
-
-      var lastLine = _index.Helpers.addNewLine() + "}";
-
+      var returnLine = "";
+      if (_index.Helpers.getRandomInt(0, 5) > 2) {
+        var randomVariable = memory.getRandomVariable();
+        if (randomVariable !== null) {
+          returnLine = _index.Helpers.addNewLine() + "    return " + randomVariable.name;
+          methodSignatureReturn = ": " + randomVariable.varType.name();
+        }
+      }
+      var firstLine = "" + Kotlin.getRandomMethodSignature() + methodSignatureReturn + " {" + _index.Helpers.addNewLine();
+      var lastLine = "" + returnLine + _index.Helpers.addNewLine() + "}";
       return firstLine + fillerLines.join(_index.Helpers.addNewLine()) + lastLine;
     }
   }]);
@@ -157,3 +167,29 @@ var Kotlin = function () {
 }();
 
 exports.default = Kotlin;
+
+var Memory = function () {
+  function Memory() {
+    _classCallCheck(this, Memory);
+
+    this.variables = [];
+  }
+
+  _createClass(Memory, [{
+    key: "addVariable",
+    value: function addVariable(name, varType) {
+      this.variables.push({ name: name, varType: varType });
+    }
+  }, {
+    key: "getRandomVariable",
+    value: function getRandomVariable() {
+      if (this.variables.length > 0) {
+        return _index.Helpers.getRandomEntry(this.variables);
+      } else {
+        return null;
+      }
+    }
+  }]);
+
+  return Memory;
+}();

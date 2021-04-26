@@ -66,7 +66,8 @@ var SQL = function () {
   }, {
     key: "generateRandomCode",
     value: function generateRandomCode(lines) {
-      var firstLine = "SELECT" + (" " + SQL.getRandomFieldName() + _index.Helpers.addNewLine());
+      var distinct = _index.Helpers.getRandomInt(1, 10) <= 3 ? " DISTINCT" : "";
+      var firstLine = "SELECT" + (distinct + " " + SQL.getRandomFieldName() + _index.Helpers.addNewLine());
       var fillerLineQty = parseInt(lines, 10);
       var fillerLines = [];
       //first loop is just for field names sorry

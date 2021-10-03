@@ -8,6 +8,7 @@ export { default as Go } from "./go.js";
 export { default as Java } from "./java.js";
 export { default as JavaScript } from "./javascript.js";
 export { default as Kotlin } from "./kotlin.js";
+export { default as Perl } from "./perl.js";
 export { default as PHP } from "./php.js";
 export { default as Powershell } from "./powershell.js";
 export { default as Python } from "./python.js";

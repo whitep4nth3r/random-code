@@ -94,6 +94,15 @@ Object.defineProperty(exports, "Kotlin", {
   }
 });
 
+var _perl = require("./perl.js");
+
+Object.defineProperty(exports, "Perl", {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_perl).default;
+  }
+});
+
 var _php = require("./php.js");
 
 Object.defineProperty(exports, "PHP", {

@@ -49,6 +49,9 @@ export function generateRandomCode(lang, n) {
     case "kotlin":
       code = LANGUAGES.Kotlin.generateRandomCode(lines);
       break;
+    case "perl":
+      code = LANGUAGES.Perl.generateRandomCode(lines, addComment);
+      break;
     case "php":
       code = LANGUAGES.PHP.generateRandomCode(lines, addComment);
       break;

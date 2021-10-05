@@ -49,6 +49,8 @@ var Comments = function () {
         case "vba":
           comment = "    ' " + Comments.options()[index].name + ": " + Comments.options()[index].messages[Math.floor(Math.random() * Comments.options()[index].messages.length)] + " ";
           break;
+        case "perl":
+          comment = "    # " + commentName + ": " + commentMessage;
         default:
           comment = "    /* " + commentName + ": " + commentMessage + " */";
           break;

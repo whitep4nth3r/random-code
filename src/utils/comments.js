@@ -65,6 +65,8 @@ export default class Comments {
           ]
         } `;
         break;
+      case "perl":
+        comment = `    # ${commentName}: ${commentMessage}`;
       default:
         comment = `    /* ${commentName}: ${commentMessage} */`;
         break;

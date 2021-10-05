@@ -10,6 +10,7 @@ const Contributors = {
   js: ["whitep4nth3r", "lukeocodes", "negue", "isabellabrookes"],
   ts: ["lukeocodes"],
   kotlin: ["jwalter"],
+  perl: ["maryjostaebler"],
   python: ["mistatwist", "callticketron"],
   powershell: ["lucecarter"],
   rust: ["sociablesteve"],

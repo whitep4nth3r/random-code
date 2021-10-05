@@ -20,6 +20,7 @@ var Languages = (_Languages = {
   js: "JavaScript",
   ts: "TypeScript",
   kotlin: "Kotlin",
+  perl: "Perl",
   python: "Python",
   powershell: "Powershell",
   rust: "Rust",
